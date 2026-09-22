@@ -1,0 +1,460 @@
+====== HTML ======
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v2-Web Components</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+JP:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <t-header></t-header>
+    <t-section
+      heading="We Build Websites"
+      details="Ever dreamed of a website that loads in under a minute? We make that happen—sometimes even faster."
+      link="#"
+      linkText="Explore the magic"
+      img="img/building websites.svg"
+      heading2="Marketing Strategies That May or May Not Work"
+      details2="We throw ideas at the wall so you don’t have to. Some even stick."
+      link2="#"
+      linkText2="See what sticks"
+      img2="img/marketing.svg"
+    ></t-section>
+    <t-main-section
+      heading="Making Google Happy (At Your Own Risk)"
+      details="SEO is an art, a science, and a guessing game all at once. We somehow make it work."
+    ></t-main-section>
+
+    <t-section
+      heading="SEO: Impress Google, Confuse Humans"
+      details="We optimize your site so well, even you might not recognize it anymore."
+      link="#"
+      linkText="Decode the strategy"
+      img="img/seo.svg"
+      heading2="Designs That Make You Say ‘Nice’"
+      details2="We blend aesthetics and usability. Mostly. No Comic Sans, we promise."
+      link2="#"
+      linkText2="Judge for yourself"
+      img2="img/design.svg"
+    ></t-section>
+    <t-main-section
+      heading="Code, Chaos, and Customer Support"
+      details="The best developers Google everything. The best support team answers before you rage quit."
+    ></t-main-section>
+
+    <t-section
+      heading="Development That’s 90% Googling"
+      details="We write code that works. Don’t ask how we got there."
+      link="#"
+      linkText="Trust the process"
+      img="img/code.svg"
+      heading2="Support That Answers Before You Rage Quit"
+      details2="Got an issue? We’ll fix it before you break something expensive."
+      link2="#"
+      linkText2="Test our patience"
+      img2="img/support.svg"
+    ></t-section>
+    <t-cta
+      heading="We are almost perfect"
+      details="What are you waiting for? Hire us already. Please, we got bills to pay."
+      linkText="Take the risk"
+      link="#"
+    ></t-cta>
+
+    <t-footer></t-footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+====== JS ======
+
+
+// header
+class THeader extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <header>
+        <img class="logo" src="img/almost logo.png" />
+        <img src="img/ham-open.svg" class="ham" />
+        <nav>
+          <a href="#">Services</a>
+          <a href="#">Our Work</a>
+          <a href="#">Pricing</a>
+          <a href="#">About</a>
+          <a class="btn" href="#">Hire us</a>
+        </nav>
+      </header>
+    `;
+  }
+}
+customElements.define("t-header", THeader);
+
+// section
+class TSection extends HTMLElement {
+  connectedCallback() {
+    const heading = this.getAttribute("heading");
+    const details = this.getAttribute("details");
+    const link = this.getAttribute("link");
+    const linkText = this.getAttribute("linkText");
+    const img = this.getAttribute("img");
+    const heading2 = this.getAttribute("heading2");
+    const details2 = this.getAttribute("details2");
+    const link2 = this.getAttribute("link2");
+    const linkText2 = this.getAttribute("linkText2");
+    const img2 = this.getAttribute("img2");
+
+    this.innerHTML = `
+      <section class="flex margin6">
+        <div>
+          <h2>${heading}</h2>
+          <p>${details}</p>
+          <a class="btn" href="${link}">${linkText}</a>
+        </div>
+        <img src="${img}"/>
+      </section>
+      <section class="flex margin6 reverse">
+        <div>
+          <h2>${heading2}</h2>
+          <p>${details2}</p>
+          <a class="btn" href="${link2}">${linkText2}</a>
+        </div>
+        <img src="${img2}"/>
+      </section>
+    `;
+  }
+}
+customElements.define("t-section", TSection);
+
+// main section
+class TMainSection extends HTMLElement {
+  connectedCallback() {
+    const heading = this.getAttribute("heading");
+    const details = this.getAttribute("details");
+
+    this.innerHTML = `
+      <div class="main-section">
+        <h2>${heading}</h2>
+        <p>${details}</p>
+      </div>
+    `;
+  }
+}
+customElements.define("t-main-section", TMainSection);
+
+// CTA
+class TCTA extends HTMLElement {
+  connectedCallback() {
+    const heading = this.getAttribute("heading");
+    const details = this.getAttribute("details");
+    const linkText = this.getAttribute("linkText");
+    const link = this.getAttribute("link");
+
+    this.innerHTML = `
+      <section class="center padding6">
+        <h2>${heading}</h2>
+        <p>${details}</p>
+        <a href="${link}" class="btn">${linkText}</a>
+      </section>
+    `;
+  }
+}
+customElements.define("t-cta", TCTA);
+
+// footer
+class TFooter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <footer>
+        <div class="footer">
+          <div class="footer-left">
+            <img class="logo" src="img/almost logo.png" />
+            <p>
+              We build websites that load in under a minute. <br />
+              Sometimes even faster.
+            </p>
+          </div>
+          <div class="footer-right">
+            <div class="social-media-icons">
+              <img src="img/icons8-github.svg" class="social-media" />
+              <img src="img/icons8-linkedin.svg" class="social-media" />
+              <img src="img/icons8-x.svg" class="social-media" />
+              <img src="img/icons8-youtube.svg" class="social-media" />
+            </div>
+            <p>
+              3 Way, 69th Street, Somewhere, USB <br />
+              123-456-7890 <br />
+              bye@almost.dev
+            </p>
+          </div>
+        </div>
+      </footer>
+    `;
+  }
+}
+customElements.define("t-footer", TFooter);
+
+// hamburger
+const ham = document.querySelector(".ham");
+const nav = document.querySelector("nav");
+ham.addEventListener("click", toggle);
+nav.addEventListener("click", toggle);
+function toggle() {
+  ham.src = ham.src.includes("img/ham-close.svg")
+    ? "img/ham-open.svg"
+    : "img/ham-close.svg";
+  nav.classList.toggle("show");
+}
+
+
+
+
+
+
+====== CSS ======
+
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables */
+:root {
+  --color10: hsl(31, 80%, 10%);
+  --color30: hsl(31, 80%, 30%);
+  --color90: hsl(31, 80%, 90%);
+  --color100: hsl(31, 80%, 100%);
+  --accent: hsl(31, 80%, 70%);
+  --ff: "Noto Sans JP", serif;
+  --ff2: "Fira Sans", serif;
+  --p: 1rem/1.5em var(--ff);
+  --h1: 600 3rem/1.2em var(--ff2);
+  --h2: 600 2rem/1.2em var(--ff2);
+  --spacing1: 4px;
+  --spacing2: 8px;
+  --spacing3: 16px;
+  --spacing4: 20px;
+  --spacing5: 40px;
+  --spacing6: 80px;
+  --spacing7: 160px;
+}
+
+/* Global Styles */
+html {
+  scroll-behavior: smooth;
+}
+body {
+  text-wrap: balance;
+  font: var(--p);
+  background: var(--color90);
+  color: var(--color10);
+}
+h1 {
+  font: var(--h1);
+}
+h2 {
+  font: var(--h2);
+  margin: var(--spacing2) 0;
+}
+p {
+  margin: var(--spacing2) 0;
+}
+a {
+  color: var(--color10);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color30);
+}
+.btn,
+button {
+  all: unset;
+  display: inline-block;
+  margin: var(--spacing2) 0;
+  background: var(--color100);
+  padding: var(--spacing2) var(--spacing3);
+  color: var(--color10);
+  border-radius: var(--spacing2);
+  border-bottom: solid var(--spacing1) var(--accent);
+  font: var(--p);
+  cursor: pointer;
+}
+.btn:hover,
+button:hover {
+  background: linear-gradient(180deg, var(--color100), var(--color90));
+  transition: 0.3s ease-in-out;
+}
+img {
+  width: 100%;
+}
+
+/* Utility Classes */
+section {
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.center {
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing4);
+  flex-wrap: wrap;
+}
+.flex > * {
+  flex: 1;
+  min-width: 400px;
+}
+.reverse {
+  flex-direction: row-reverse;
+}
+.padding1 {
+  padding: var(--spacing1) 0;
+}
+.padding2 {
+  padding: var(--spacing2) 0;
+}
+.padding3 {
+  padding: var(--spacing3) 0;
+}
+.padding4 {
+  padding: var(--spacing4) 0;
+}
+.padding5 {
+  padding: var(--spacing5) 0;
+}
+.padding6 {
+  padding: var(--spacing6) 0;
+}
+.padding7 {
+  padding: var(--spacing7) 0;
+}
+.margin1 {
+  margin: var(--spacing1) auto;
+}
+.margin2 {
+  margin: var(--spacing2) auto;
+}
+.margin3 {
+  margin: var(--spacing3) auto;
+}
+.margin4 {
+  margin: var(--spacing4) auto;
+}
+.margin5 {
+  margin: var(--spacing5) auto;
+}
+.margin6 {
+  margin: var(--spacing6) auto;
+}
+.margin7 {
+  margin: var(--spacing7) auto;
+}
+
+/* header */
+header {
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: var(--spacing4) 0;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing5);
+}
+.ham {
+  display: none;
+  width: 20px;
+}
+@media (max-width: 800px) {
+  .ham {
+    display: block;
+  }
+  nav {
+    display: none;
+  }
+  nav.show {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: var(--spacing6);
+    right: 0px;
+    background: var(--accent);
+    padding: var(--spacing4);
+    gap: var(--spacing4);
+    border-radius: var(--spacing2);
+  }
+}
+.logo {
+  width: 100px;
+}
+
+/* main section */
+.main-section {
+  margin: var(--spacing7) auto var(--spacing6) auto;
+  text-align: center;
+  padding: var(--spacing6) 0;
+  background: var(--accent);
+}
+.main-section h2 {
+  font: var(--h1);
+}
+
+/* footer */
+footer {
+  background: var(--accent);
+  padding: var(--spacing5) 0 var(--spacing6) 0;
+}
+.footer {
+  width: 90%;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column;
+    gap: var(--spacing4);
+  }
+}
+.footer-right,
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+.social-media-icons {
+  display: flex;
+  gap: var(--spacing4);
+}
+.social-media {
+  width: 32px;
+}
